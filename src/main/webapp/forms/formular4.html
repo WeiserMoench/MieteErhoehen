@@ -1,0 +1,80 @@
+<form class="form-horizontal" charset=utf-8>
+	<script cam-script type="text/form-script">
+	   
+	    $scope.open = function($event) { 
+	        $event.preventDefault(); 
+	        $event.stopPropagation(); 
+	        $scope.dateFieldOpened = true; 
+	    };
+	</script>
+
+<h1>Antrag auf H&aumlrtefallregelung einlesen</h1>
+
+<p>
+&Uumlber dieses Programm k&oumlnnen Sie die Daten eines Antrages auf H&aumlrtefallregelung einlesen.<br>
+Bitte laden Sie ebenfalls die gescannten Antragsunterlagen hoch.
+</p>
+ 
+<div class="form-group">
+	<label for="anzahlBewohner">Anzahl der Bewohner</label> 
+	<input name="anzahlBewohner" class="form-control" 
+	cam-variable-type="Integer" cam-variable-name="anzahlBewohner" required="true"/>
+</div>
+ 
+<div class="form-group">
+	<label for="anzahlKinderfreibetraege">- davon Kinder</label> 
+	<input name="anzahlKinderfreibetraege" class="form-control" 
+	cam-variable-type="Integer" cam-variable-name="anzahlKinderfreibetraege" required="true"/>
+</div>
+<p>
+
+<div class="form-group">
+	<label for="anzahlEinkommensbezieher">Anzahl der Einkommensbezieher</label> 
+	<input name="anzahlEinkommensbezieher" class="form-control" 
+	cam-variable-type="Integer" cam-variable-name="anzahlEinkommensbezieher" required="true"/>
+</div>
+ 
+<div class="form-group">
+	<label for="bruttoHaushaltseinkommen">Summe der Bruttoeinkommen aller Bewohner pro Jahr</label> 
+	<input name="bruttoHaushaltseinkommen" class="form-control" 
+	cam-variable-type="Double" cam-variable-name="bruttoHaushaltseinkommen" required="true"/>
+</div>
+<p>
+
+<div class="form-group">
+	<label for="arbeitnehmerpauschaleNachgewiesen">Arbeitnehmerpauschale (Werbungskosten) zu ber&uumlcksichtigen?</label> 
+	<input name="arbeitnehmerpauschaleNachgewiesen" class="form-control" type="checkbox" 
+	cam-variable-type="Boolean" cam-variable-name="arbeitnehmerpauschaleNachgewiesen"/>
+</div>
+
+<div class="form-group">
+	<label for="einkommenssteuerNachgewiesen">Einkommenssteuer zu ber&uumlcksichtigen?</label> 
+	<input name="einkommenssteuerNachgewiesen" class="form-control" type="checkbox" 
+	cam-variable-type="Boolean" cam-variable-name="einkommenssteuerNachgewiesen"/>
+</div>
+ 
+<div class="form-group">
+	<label for="krankenversicherungNachgewiesen">Krankenversicherung zu ber&uumlcksichtigen?</label> 
+	<input name="krankenversicherungNachgewiesen" class="form-control" type="checkbox" 
+	cam-variable-type="Boolean" cam-variable-name="krankenversicherungNachgewiesen"/>
+</div>
+ 
+<div class="form-group">
+	<label for="rentenversicherungNachgewiesen"> Rentenversicherung zu ber&uumlcksichtigen?</label> 
+	<input name="rentenversicherungNachgewiesen" class="form-control" type="checkbox" 
+	cam-variable-type="Boolean" cam-variable-name="rentenversicherungNachgewiesen"/>
+</div>
+<p>
+
+ 	<div>
+		Datum der Unterschrift <input class="form-control"
+			cam-variable-type="String" cam-variable-name="DatumDerUnterschriftHaertefallregelung" name="DatumDerUnterschrift"
+			datepicker-popup="dd.MM.yyyy" show-button-bar="false"
+			onkeydown="return false;" is-open="dateFieldOpened"
+			ng-click="open($event)"/>
+		<div role="alert"></div>
+	</div>
+
+
+</form>
+	

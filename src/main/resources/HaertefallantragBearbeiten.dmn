@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="DMNHaertefallantragBearbeiten" name="Decision" namespace="http://camunda.org/schema/1.0/dmn">
+  <inputData id="InputData_1elmg4v" name="arbeitnehmerpauschaleNachgewiesen">
+    <extensionElements>
+      <biodi:bounds x="412" y="776" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_0bhd31r" name="anzahlKinderfreibetraege">
+    <extensionElements>
+      <biodi:bounds x="411" y="652" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_0jqwdqg" name="nettoHaushaltseinkommen">
+    <extensionElements>
+      <biodi:bounds x="215" y="871" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="getKinderfreibetraegeAbgezogen" name="Abzug Kinderfreibeträge">
+    <extensionElements>
+      <biodi:bounds x="190" y="635" width="180" height="80" />
+      <biodi:edge source="InputData_0bhd31r">
+        <biodi:waypoints x="411" y="675" />
+        <biodi:waypoints x="370" y="675" />
+      </biodi:edge>
+      <biodi:edge source="getArbeitnehmerpauschaleAbgezogen">
+        <biodi:waypoints x="278" y="756" />
+        <biodi:waypoints x="277" y="715" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_0bhd31r" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#getArbeitnehmerpauschaleAbgezogen" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_06dl00b">
+      <input id="InputClause_10ci5n1" label="anzahlKinderfreibetraege" camunda:inputVariable="anzahlKinderfreibetraege">
+        <inputExpression id="LiteralExpression_01zgbo0" typeRef="integer">
+          <text>anzahlKinderfreibetraege</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0biwrsb" label="arbeitnehmerpauschaleAbgezogen" camunda:inputVariable="arbeitnehmerpauschaleAbgezogen">
+        <inputExpression id="LiteralExpression_1v6wycd" typeRef="double">
+          <text>arbeitnehmerpauschaleAbgezogen</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0zk0php" label="kinderfreibetraegeAbgezogen" name="kinderfreibetraegeAbgezogen" typeRef="double" />
+      <rule id="row-17154352-3">
+        <inputEntry id="UnaryTests_0fyrjt6">
+          <text><![CDATA[>0]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1j7pvnm">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03vj2fe">
+          <text>(arbeitnehmerpauschaleAbgezogen - (600 * anzahlKinderfreibetraege))</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-17154352-4">
+        <inputEntry id="UnaryTests_0kazsur">
+          <text>0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1537xat">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0wbav03">
+          <text>arbeitnehmerpauschaleAbgezogen</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="getArbeitnehmerpauschaleAbgezogen" name="Abzug Arbeitnehmerpauschale">
+    <extensionElements>
+      <biodi:bounds x="189" y="756" width="180" height="80" />
+      <biodi:edge source="InputData_0jqwdqg">
+        <biodi:waypoints x="278" y="871" />
+        <biodi:waypoints x="277" y="836" />
+      </biodi:edge>
+      <biodi:edge source="InputData_1elmg4v">
+        <biodi:waypoints x="412" y="798" />
+        <biodi:waypoints x="369" y="797" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_0jqwdqg" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_0jqwdqg" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_1elmg4v" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_178jjaa" hitPolicy="FIRST">
+      <input id="InputClause_1w5qdoc" label="arbeitnehmerpauschaleNachgewiesen" camunda:inputVariable="arbeitnehmerpauschaleNachgewiesen">
+        <inputExpression id="LiteralExpression_0jbjc5m" typeRef="boolean">
+          <text>arbeitnehmerpauschaleNachgewiesen</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1fgh5tk" label="bruttoHaushaltseinkommen" camunda:inputVariable="bruttoHaushaltseinkommen">
+        <inputExpression id="LiteralExpression_1qvn0xs" typeRef="double">
+          <text>bruttoHaushaltseinkommen</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1a92dew" label="arbeitnehmerpauschaleAbgezogen" name="arbeitnehmerpauschaleAbgezogen" typeRef="double" />
+      <rule id="row-384595162-1">
+        <inputEntry id="UnaryTests_0e41616">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pfspg6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gl2iux">
+          <text>(bruttoHaushaltseinkommen - 1000)</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-384595162-2">
+        <inputEntry id="UnaryTests_0omm9sk">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0i5zy0r">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0y0pt4l">
+          <text>bruttoHaushaltseinkommen</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1etaupe" name="einkommenssteuerNachgewiesen">
+    <extensionElements>
+      <biodi:bounds x="411" y="532" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="getEinkommenssteuerAbgezogen" name="Abzug Einkommenssteuerpauschale">
+    <extensionElements>
+      <biodi:bounds x="190" y="509" width="180" height="80" />
+      <biodi:edge source="getKinderfreibetraegeAbgezogen">
+        <biodi:waypoints x="280" y="635" />
+        <biodi:waypoints x="280" y="589" />
+      </biodi:edge>
+      <biodi:edge source="InputData_1etaupe">
+        <biodi:waypoints x="411" y="553" />
+        <biodi:waypoints x="370" y="552" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#getKinderfreibetraegeAbgezogen" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_1etaupe" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0cdig95">
+      <input id="InputClause_06h3s40" label="einkommenssteuerNachgewiesen" camunda:inputVariable="einkommenssteuerNachgewiesen">
+        <inputExpression id="LiteralExpression_0fi6w6x" typeRef="boolean">
+          <text>einkommenssteuerNachgewiesen</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0869njf" label="kinderfreibetraegeAbgezogen" camunda:inputVariable="kinderfreibetraegeAbgezogen">
+        <inputExpression id="LiteralExpression_0aal2ee" typeRef="double">
+          <text>kinderfreibetraegeAbgezogen</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_148fnd5" label="einkommenssteuerpauschaleAbgezogen" name="einkommenssteuerpauschaleAbgezogen" typeRef="double" />
+      <rule id="row-384595162-3">
+        <inputEntry id="UnaryTests_04cva0x">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00dnri9">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1lw3gbu">
+          <text>(kinderfreibetraegeAbgezogen - (bruttoHaushaltseinkommen * 0.1))</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-384595162-4">
+        <inputEntry id="UnaryTests_0v82d0l">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1c1l7k1">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18r5rct">
+          <text>kinderfreibetraegeAbgezogen</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="getKrankenversicherungspauschaleAbgezogen" name="Abzug Krankenversicherungspauschale">
+    <extensionElements>
+      <biodi:bounds x="189" y="390" width="180" height="80" />
+      <biodi:edge source="getEinkommenssteuerAbgezogen">
+        <biodi:waypoints x="280" y="509" />
+        <biodi:waypoints x="279" y="470" />
+      </biodi:edge>
+      <biodi:edge source="InputData_19vwqix">
+        <biodi:waypoints x="412" y="430" />
+        <biodi:waypoints x="369" y="430" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#getEinkommenssteuerAbgezogen" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_19vwqix" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0kqusqa">
+      <input id="InputClause_13hluze" label="krankenversicherungNachgewiesen" camunda:inputVariable="krankenversicherungNachgewiesen">
+        <inputExpression id="LiteralExpression_0sxql2a" typeRef="boolean">
+          <text>krankenversicherungNachgewiesen</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1ilwki0" label="einkommenssteuerpauschaleAbgezogen" camunda:inputVariable="einkommenssteuerpauschaleAbgezogen">
+        <inputExpression id="LiteralExpression_1d1ttj4" typeRef="double">
+          <text>einkommenssteuerpauschaleAbgezogen</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1owp5kz" label="krankenversicherungspauschaleAbgezogen" name="krankenversicherungspauschaleAbgezogen" typeRef="double" />
+      <rule id="row-384595162-5">
+        <inputEntry id="UnaryTests_07xem2t">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j4fo7j">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_01x9den">
+          <text>(einkommenssteuerpauschaleAbgezogen - (bruttoHaushaltseinkommen * 0.1))</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-384595162-6">
+        <inputEntry id="UnaryTests_0pipphq">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o5cdf5">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vbl47f">
+          <text>einkommenssteuerpauschaleAbgezogen</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_19vwqix" name="krankenversicherungNachgewisesn">
+    <extensionElements>
+      <biodi:bounds x="412" y="407" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_0ayicuc" name="rentenversicherungNachgewiesen">
+    <extensionElements>
+      <biodi:bounds x="413" y="283" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="getAnrechenbaresEinkommen" name="Abzug Rentenversicherungspauschale">
+    <extensionElements>
+      <biodi:bounds x="189" y="268" width="180" height="80" />
+      <biodi:edge source="getKrankenversicherungspauschaleAbgezogen">
+        <biodi:waypoints x="279" y="390" />
+        <biodi:waypoints x="279" y="348" />
+      </biodi:edge>
+      <biodi:edge source="InputData_0ayicuc">
+        <biodi:waypoints x="413" y="307" />
+        <biodi:waypoints x="369" y="307" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#getKrankenversicherungspauschaleAbgezogen" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_0ayicuc" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_16dwmjp">
+      <input id="InputClause_159fkwy" label="rentenversicherungNachgewiesen" camunda:inputVariable="rentenversicherungNachgewiesen">
+        <inputExpression id="LiteralExpression_01iby40" typeRef="boolean">
+          <text>rentenversicherungNachgewiesen</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_12oqpvs" label="krankenversicherungspauschaleAbgezogen" camunda:inputVariable="krankenversicherungspauschaleAbgezogen">
+        <inputExpression id="LiteralExpression_0qv7jzg" typeRef="double">
+          <text>krankenversicherungspauschaleAbgezogen</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1dh3m7h" label="anrechenbaresEinkommen" name="anrechenbaresEinkommen" typeRef="double" />
+      <rule id="row-384595162-7">
+        <inputEntry id="UnaryTests_1808a0m">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ltsozn">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1q2wnzq">
+          <text>(krankenversicherungspauschaleAbgezogen - (bruttoHaushaltseinkommen * 0.1))</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-384595162-8">
+        <inputEntry id="UnaryTests_0xs6b5a">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08306ap">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_16shvj8">
+          <text>krankenversicherungspauschaleAbgezogen</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_06f7leu" name="aktuelle_Miete">
+    <extensionElements>
+      <biodi:bounds x="411" y="157" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="getMaxErhoehungHaertefallregelung" name="maximale Erhöhung laut Härtefallregelung bestimmen">
+    <extensionElements>
+      <biodi:bounds x="188" y="140" width="180" height="80" />
+      <biodi:edge source="InputData_06f7leu">
+        <biodi:waypoints x="411" y="179" />
+        <biodi:waypoints x="368" y="179" />
+      </biodi:edge>
+      <biodi:edge source="getAnrechenbaresEinkommen">
+        <biodi:waypoints x="279" y="268" />
+        <biodi:waypoints x="279" y="220" />
+      </biodi:edge>
+    </extensionElements>
+    <variable id="InformationItem_04ojy0g" name="maxErhoehungHaertefallregelung" typeRef="double" />
+    <informationRequirement>
+      <requiredInput href="#InputData_06f7leu" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#getAnrechenbaresEinkommen" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_03st4h4" expressionLanguage="javascript">
+      <text>((anrechenbaresEinkommen * 0.3 / 12) - (aktuelle_Miete))</text>
+    </literalExpression>
+  </decision>
+  <decision id="getHaertefallantragBearbeiten" name="Erhöhung laut Härtefallregelung bestimmen">
+    <extensionElements>
+      <biodi:bounds x="187" y="12" width="180" height="80" />
+      <biodi:edge source="getMaxErhoehungHaertefallregelung">
+        <biodi:waypoints x="278" y="140" />
+        <biodi:waypoints x="277" y="92" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#getMaxErhoehungHaertefallregelung" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_16ffclx">
+      <input id="InputClause_1k7cv0g" label="maxErhoehungHaertefallregelung" camunda:inputVariable="maxErhoehungHaertefallregelung">
+        <inputExpression id="LiteralExpression_0l8tddn" typeRef="double">
+          <text>maxErhoehungHaertefallregelung</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0d7ymrb" label="relevanteMieterhoehung" camunda:inputVariable="relevanteMieterhoehung">
+        <inputExpression id="LiteralExpression_07dyk1t" typeRef="double">
+          <text>relevanteMieterhoehung</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1mlpxss" label="erhoehungHaertefallregelung" name="erhoehungHaertefallregelung" typeRef="double" />
+      <rule id="row-384595162-9">
+        <inputEntry id="UnaryTests_1xkwj49">
+          <text><![CDATA[>= 0]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1iko3o1">
+          <text><![CDATA[< maxErhoehungHaertefallregelung]]></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1cxbv02">
+          <text>relevanteMieterhoehung</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-384595162-10">
+        <inputEntry id="UnaryTests_1p5n7nq">
+          <text><![CDATA[>= 0]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0z10hdo">
+          <text><![CDATA[>= maxErhoehungHaertefallregelung]]></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1g7igqp">
+          <text>maxErhoehungHaertefallregelung</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-751339432-1">
+        <inputEntry id="UnaryTests_1xozkgm">
+          <text><![CDATA[< 0]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ll6bve">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1tm8y4w">
+          <text>relevanteMieterhoehung</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

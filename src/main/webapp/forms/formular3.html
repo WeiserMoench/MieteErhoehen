@@ -1,0 +1,36 @@
+<form class="form-horizontal" charset=utf-8>
+
+	<script cam-script type="text/form-script">
+	   
+	    $scope.open = function($event) { 
+	        $event.preventDefault(); 
+	        $event.stopPropagation(); 
+	        $scope.dateFieldOpened = true; 
+	    };
+	</script>
+
+
+<h1>Zustimmung einlesen</h1>
+
+<p>
+&Uumlber dieses Programm k&oumlnnen Sie die Zustimmung des Kunden einlesen.
+Bitte laden Sie daf&uumlr die Zustimmungserkl&aumlrung hoch. 
+
+</p>
+
+<div class="controls">
+ <label for="Zustimmung einlesen">Zustimmung einlesen</label> 
+  <input style="width: 400px;" type="file" cam-variable-name="Zustimmung"
+   cam-variable-type="File" cam-max-filesize="10000000"/>
+ </div>
+
+ 
+ 	<div>
+		Datum der Unterschrift <input class="form-control"
+			cam-variable-type="String" cam-variable-name="DatumDerUnterschriftZustimmung" name="DatumDerUnterschrift"
+			datepicker-popup="dd.MM.yyyy" show-button-bar="false"
+			onkeydown="return false;" is-open="dateFieldOpened"
+			ng-click="open($event)"/>
+		<div role="alert"></div>
+	</div>
+</form>
