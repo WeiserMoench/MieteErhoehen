@@ -1,0 +1,32 @@
+<form class="form-horizontal" charset=utf-8>
+	<script cam-script type="text/form-script">
+	   
+	    $scope.open = function($event) { 
+	        $event.preventDefault(); 
+	        $event.stopPropagation(); 
+	        $scope.dateFieldOpened = true; 
+	    };
+	</script>
+
+<h1>Fehler zum Mietvertrag</h1>
+
+<p>
+Der Vorgang zu dem Mietvertrag mit der Nummer 
+<input style="width: 400px;" cam-variable-type="String" cam-variable-name="Mietvertragsnummer"
+			name="mietvertragsnummer" readonly="true"> konnte nicht weitergef&uuml;hrt werden.
+</p>
+
+<br>
+
+<strong>Grund</strong>
+<p>
+<input style="width: 600px;"cam-variable-type="String" cam-variable-name="Abbruchmeldung"
+			name="Abbruchmeldung" readonly="true">
+</p>
+
+	<div class="form-group">
+		Zur Kenntnis genommen <input type="checkbox" name="FehlerZurKenntnisGenommen"
+			cam-variable-name="FehlerZurKenntnisGenommen" cam-variable-type="Boolean" />
+	</div>
+
+</form>

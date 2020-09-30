@@ -1,0 +1,74 @@
+<form class="form-horizontal" charset=utf-8>
+	<script cam-script type="text/form-script">
+	   
+	    $scope.open = function($event) { 
+	        $event.preventDefault(); 
+	        $event.stopPropagation(); 
+	        $scope.dateFieldOpened = true; 
+	    };
+	</script>
+
+<h1>Antrag auf H&aumlrtefallregelung einlesen</h1>
+
+<p>
+&Uumlber dieses Programm k&oumlnnen Sie den Antrag auf H&aumlrtefallregelung einlesen.
+Bitte laden Sie hierf&uumlr die Unterlagen zum Antrag auf H&aumlrtefallregelung hoch.
+</p>
+
+<div class="controls">
+<label for="Dokument einlesen">Dokument einlesen</label>
+  <input type="file" cam-variable-name="DokumentHaertefallAntrag"
+   cam-variable-type="File" cam-max-filesize="10000000" 
+   required="true"/>
+ </div>
+
+ 	<div>
+		Datum der Unterschrift <input class="form-control"
+			cam-variable-type="String" cam-variable-name="DatumDerUnterschrift" name="DatumDerUnterschrift"
+			datepicker-popup="dd.MM.yyyy" show-button-bar="false"
+			onkeydown="return false;" is-open="dateFieldOpened"
+			ng-click="open($event)" 
+			 />
+		<div role="alert"></div>
+	</div>
+ 
+
+ 
+ <div class="form-group">
+  <label for="Anzahl der Bewohner">Anzahl der Bewohner</label> <input class="form-control"
+   cam-variable-type="Integer" cam-variable-name="AnzahlDerBewohner"
+   name="Anzahl der Bewohner" 
+   required="true"/>
+ </div>
+ 
+  <div class="form-group">
+  <label for="Summe der Einkommen aller Bewohner pro Jahr (Schreibweise xxxxx.xx)">Summe der Einkommen aller Bewohner</label> <input class="form-control"
+   cam-variable-type="Double" cam-variable-name="hauhaltseinkommen"
+   name="Summe der Einkommen aller Bewohner">
+ </div>
+ 
+ <div class="form-group">
+		Werbungskosten? <input type="checkbox" name="werbungskosten"
+			cam-variable-name="werbungskosten" cam-variable-type="Boolean" />
+	</div>
+	
+	<div class="form-group">
+		Einkommenssteuer? <input type="checkbox" name="einkommenssteuer"
+			cam-variable-name="einkommenssteuer" cam-variable-type="Boolean" />
+	</div>
+	
+	<div class="form-group">
+		Kranken-/Pflegeversicherung? <input type="checkbox" name="Kranken-/Pflegeversicherung"
+			cam-variable-name="KrankenPflegeversicherung" cam-variable-type="Boolean" />
+	</div>
+	
+	<div class="form-group">
+		Rentenversicherung? <input type="checkbox" name="Rentenversicherung"
+			cam-variable-name="Rentenversicherung" cam-variable-type="Boolean" />
+	</div>
+	
+		<div class="form-group">
+		Freibetrag Kind? <input type="checkbox" name="FreibetragKind"
+			cam-variable-name="FreibetragKind" cam-variable-type="Boolean" />
+	</div>
+ </form>	

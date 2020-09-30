@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="DMNHaertefallregelungMoeglich" name="Decision" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="getZulaessigesHaushaltseinkommen" name="zulaessiges Haushaltseinkommen bestimmen">
+    <extensionElements>
+      <biodi:bounds x="190" y="260" width="180" height="80" />
+      <biodi:edge source="InputData_0j507fj">
+        <biodi:waypoints x="400" y="383" />
+        <biodi:waypoints x="342" y="340" />
+      </biodi:edge>
+      <biodi:edge source="InputData_0gs3k38">
+        <biodi:waypoints x="281" y="385" />
+        <biodi:waypoints x="281" y="340" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_0j507fj" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_0gs3k38" />
+    </informationRequirement>
+    <decisionTable hitPolicy="FIRST">
+      <input id="InputClause_02mo4of" label="anzahlBewohner" camunda:inputVariable="anzahlBewohner">
+        <inputExpression id="LiteralExpression_0t5oi9y" typeRef="integer">        <text>anzahlBewohner</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_08fouem" label="anzahlEinkommensbezieher" camunda:inputVariable="anzahlEinkommensbezieher">
+        <inputExpression id="LiteralExpression_0jbc14c" typeRef="integer">        <text>anzahlEinkommensbezieher</text>
+</inputExpression>
+      </input>
+      <output id="output_1" label="zulaessigesHaushaltseinkommen" name="zulaessigesHaushaltseinkommen" typeRef="double" />
+      <rule id="row-876122135-1">
+        <description>1 Einkommensbezieher</description>
+        <inputEntry id="UnaryTests_1lvrtsh">        <text>1</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1c4xd21">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_15nfj75">        <text>16800</text>
+</outputEntry>
+      </rule>
+      <rule id="row-876122135-2">
+        <description>1 Einkommensbezieher</description>
+        <inputEntry id="UnaryTests_1l509ld">        <text>2</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_03xq2go">        <text>1</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_122wwss">        <text>25900</text>
+</outputEntry>
+      </rule>
+      <rule id="row-876122135-3">
+        <description>2 Einkommensbezieher</description>
+        <inputEntry id="UnaryTests_15jw23w">        <text>2</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0dve061">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1014axz">        <text>25200</text>
+</outputEntry>
+      </rule>
+      <rule id="row-876122135-4">
+        <description><![CDATA[>=1 Einkommensbezieher]]></description>
+        <inputEntry id="UnaryTests_0c8bwul">        <text>3</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1wo056g">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0y1x2th">        <text>31640</text>
+</outputEntry>
+      </rule>
+      <rule id="row-876122135-5">
+        <description><![CDATA[>=1 Einkommensbezieher]]></description>
+        <inputEntry id="UnaryTests_1ugx81d">        <text><![CDATA[>= 4]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1pfbi4h">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_184ezem">        <text>38080</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0gs3k38" name="anzahlEinkommensbezieher">
+    <extensionElements>
+      <biodi:bounds x="218" y="385" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_0j507fj" name="anzahlBewohner">
+    <extensionElements>
+      <biodi:bounds x="373" y="383" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="getZulaessigeWohnflaeche" name="zulaessige Wohnflaeche bestimmen">
+    <extensionElements>
+      <biodi:bounds x="414" y="260" width="180" height="80" />
+      <biodi:edge source="InputData_0j507fj">
+        <biodi:waypoints x="461" y="383" />
+        <biodi:waypoints x="461" y="340" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_0j507fj" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1cekiqf">
+      <input id="InputClause_0hxz9ei" label="anzahlBewohner" camunda:inputVariable="anzahlBewohner">
+        <inputExpression id="LiteralExpression_1ayqto2" typeRef="integer">        <text>anzahlBewohner</text>
+</inputExpression>
+      </input>
+      <output id="OutputClause_0lhhowx" label="zulaessigeWohnflaeche" name="zulaessigeWohnflaeche" typeRef="double" />
+      <rule id="row-876122135-6">
+        <inputEntry id="UnaryTests_1l7lufe">        <text><![CDATA[<=4]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1vm6jtm">        <text>30 + (anzahlBewohner * 15.0)</text>
+</outputEntry>
+      </rule>
+      <rule id="row-876122135-7">
+        <inputEntry id="UnaryTests_0wmrf09">        <text><![CDATA[>4]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0fzrmqq">        <text>85 + ((anzahlBewohner - 4) * 12.0)</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="getUeberschuessigeWohnflaeche" name="ueberschuessigeWohnflaeche">
+    <extensionElements>
+      <biodi:bounds x="414" y="141" width="180" height="80" />
+      <biodi:edge source="InputData_0dl65yw">
+        <biodi:waypoints x="664" y="382" />
+        <biodi:waypoints x="594" y="190" />
+      </biodi:edge>
+      <biodi:edge source="getZulaessigeWohnflaeche">
+        <biodi:waypoints x="505" y="260" />
+        <biodi:waypoints x="504" y="221" />
+      </biodi:edge>
+    </extensionElements>
+    <variable id="InformationItem_1c2rl4v" name="ueberschuessigeWohnflaeche" typeRef="double" />
+    <informationRequirement>
+      <requiredInput href="#InputData_0dl65yw" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#getZulaessigeWohnflaeche" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_1fq7j1o" expressionLanguage="javascript">    <text>(Nettowohnflaeche - zulaessigeWohnflaeche)</text>
+</literalExpression>
+  </decision>
+  <inputData id="InputData_0dl65yw" name="NettoWohnflaeche">
+    <extensionElements>
+      <biodi:bounds x="601" y="384" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="getUeberschuessigesHaushaltseinkommen" name="ueberschuessigesHaushaltseinkommen">
+    <extensionElements>
+      <biodi:bounds x="188" y="139" width="180" height="80" />
+      <biodi:edge source="getZulaessigesHaushaltseinkommen">
+        <biodi:waypoints x="278" y="260" />
+        <biodi:waypoints x="280" y="219" />
+      </biodi:edge>
+      <biodi:edge source="InputData_1lgdzos">
+        <biodi:waypoints x="119" y="385" />
+        <biodi:waypoints x="188" y="179" />
+      </biodi:edge>
+    </extensionElements>
+    <variable id="InformationItem_1h7ibwr" name="ueberschuessigesHaushaltseinkommen" typeRef="double" />
+    <informationRequirement>
+      <requiredDecision href="#getZulaessigesHaushaltseinkommen" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_1lgdzos" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_0jaa22e" expressionLanguage="javascript">    <text>(bruttoHaushaltseinkommen - zulaessigesHaushaltseinkommen)</text>
+</literalExpression>
+  </decision>
+  <inputData id="InputData_1lgdzos" name="bruttoHaushaltseinkommen">
+    <extensionElements>
+      <biodi:bounds x="56" y="385" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="getHaertefallregelungMoeglich" name="haertefallregelungMoeglich">
+    <extensionElements>
+      <biodi:bounds x="301" y="26" width="180" height="80" />
+      <biodi:edge source="getUeberschuessigesHaushaltseinkommen">
+        <biodi:waypoints x="312" y="139" />
+        <biodi:waypoints x="341" y="106" />
+      </biodi:edge>
+      <biodi:edge source="getUeberschuessigeWohnflaeche">
+        <biodi:waypoints x="467" y="141" />
+        <biodi:waypoints x="429" y="106" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#getUeberschuessigesHaushaltseinkommen" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#getUeberschuessigeWohnflaeche" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1l1h74k" hitPolicy="FIRST">
+      <input id="InputClause_0vf3pz2" label="ueberschuessigesHaushaltseinkommen" camunda:inputVariable="ueberschuessigesHaushaltseinkommen">
+        <inputExpression id="LiteralExpression_10w939d" typeRef="double">        <text>ueberschuessigesHaushaltseinkommen</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1wqxyh6" label="ueberschuessigeWohnflaeche" camunda:inputVariable="ueberschuessigeWohnflaeche">
+        <inputExpression id="LiteralExpression_0jlusd0" typeRef="double">        <text>ueberschuessigeWohnflaeche</text>
+</inputExpression>
+      </input>
+      <output id="OutputClause_0c0513h" label="haertefallregelungMoeglich" name="haertefallregelungMoeglich" typeRef="boolean" />
+      <rule id="row-876122135-8">
+        <inputEntry id="UnaryTests_1i48y8u">        <text><![CDATA[<=0]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0fdugxw">        <text><![CDATA[<=0]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1rbbrsn">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="row-876122135-9">
+        <inputEntry id="UnaryTests_0ajbcyi">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1aip9ci">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1v6yk0j">        <text>false</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
