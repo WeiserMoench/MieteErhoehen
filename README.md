@@ -9,7 +9,9 @@ Die Abschlussdokumentation befindet sich im Ordner Doku.
 
 Um das Programm aktiv zu starten wird die [Camunda Workflow Engine](https://camunda.com/de/products/camunda-bpm/bpmn-engine/) benötigt.
 
+Der vollständige Prozess wird in dem folgenden BPMN dargestellt.
 
+![BPMN Process](https://github.com/WeiserMoench/MieteErhoehen/blob/master/Mieterhoehung.png)
 
 ## Camunda BPM Process Application
 A Process Application for [Camunda BPM](http://docs.camunda.org).
