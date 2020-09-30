@@ -1,8 +1,8 @@
 # Miete erhoehen
-Hierbei handelte es sich um ein Projekt in dem Fach Modellierung von Anwendungssystemen.
+Hierbei handelte es sich um ein Projekt an der HTW Berlin in dem Kurs Modellierung von Anwendungssystemen.
 Dieses Projekt wurde von dem Team Camunda 4 bearbeitet, welches aus den nachfolgenden Mitgliedern bestand:
-Fiebelkorn, Christian (PL) s0558587
-Fröhlich, Steffen s0559875
+Fiebelkorn, Christian (PL) s0558587;
+Fröhlich, Steffen s0559875;
 Fidan, Handan s0558029
 
 Die Abschlussdokumentation befindet sich im Ordner Doku.
